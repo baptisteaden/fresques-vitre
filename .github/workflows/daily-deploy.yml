@@ -8,10 +8,13 @@ on:
 jobs:
   deployment:
     runs-on: ubuntu-latest
+    environment: 'Production'
+     
     steps:
     - name: Git checkout
       uses: actions/checkout@v4
       with: { ref: main }
+      
     - name: Deploy
       uses: fjogeleit/http-request-action@v1
       with:
