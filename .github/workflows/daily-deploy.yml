@@ -1,0 +1,15 @@
+name: daily deploy
+
+on:
+  schedule:
+    - cron: '40 20 * * *'
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy
+      uses: fjogeleit/http-request-action@v1
+      with:
+        url: ${{ secrets.DEPLOY_HOOK_URL }}
+        method: 'GET'
