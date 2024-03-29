@@ -2,15 +2,17 @@ name: daily deploy
 
 on:
   schedule:
-    - cron: '0 21 * * *'
+    - cron: '*/2 * * * *'
 
 jobs:
   deployment:
     runs-on: ubuntu-latest
     steps:
+    - name: Git checkout
+      uses: actions/checkout@v4
+      with: { ref: main }
     - name: Deploy
       uses: fjogeleit/http-request-action@v1
       with:
         url: ${{ secrets.DEPLOY_HOOK_URL }}
         method: 'GET'
-        ref: main
