@@ -6,5 +6,8 @@ jobs:
   test_schedule:
     runs-on: ubuntu-latest
     steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+        with: { ref: debug }
       - name: Bonsoir
         run: echo "Bonsoir"
