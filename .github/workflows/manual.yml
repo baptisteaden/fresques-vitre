@@ -30,6 +30,6 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      run: "Hello ${{ secrets.DEPLOY_HOOK_URL }}"
+      run: echo "Hello ${{ secrets.DEPLOY_HOOK_URL }}"
       env:
         DEPLOY_HOOK_URL: ${{ secrets.DEPLOY_HOOK_URL }}
