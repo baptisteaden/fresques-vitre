@@ -11,7 +11,7 @@ import mapPinSvg from "../../public/icons/map-pin.svg";
 const { lastUpdate, workshops } = await getWorkshops();
 ---
 
-<Layout title="Fresques climat à Vitré">
+<Layout title="Fresques Vitré">
   <header class="mb-4">
     <h1
       class="title text-center text-6xl font-bold text-purple-700 tracking-widest mb-2"
@@ -19,7 +19,7 @@ const { lastUpdate, workshops } = await getWorkshops();
       Fresques Vitré
     </h1>
     <h2 class="text-center text-lg text-purple-700 opacity-70">
-      Ateliers climat autour de Vitré
+      Ateliers climat à proximité de Vitré
     </h2>
   </header>
 
@@ -35,7 +35,7 @@ const { lastUpdate, workshops } = await getWorkshops();
     <ul class="grid grid-cols-1 items-center gap-6">
       {
         workshops.map((w) => (
-          <li class="border w-full hover:border-purple-700 rounded-lg p-4 m-auto flex flex-col gap-2 transition-all bg-violet-50">
+          <li class="border w-full border-purple-700 rounded-lg p-4 m-auto flex flex-col gap-2 transition-all bg-violet-50">
             {/* Logo + name */}
             <div class="flex justify-between">
               <h3 class="text-xl text-purple-700">{w.workshopTypeDets.name}</h3>
@@ -70,9 +70,9 @@ const { lastUpdate, workshops } = await getWorkshops();
                 {w.kmsFromVitre && (
                   <div class="flex gap-2">
                     {/* Distance from Vitre */}
-                    <div>
+                    <strong>
                       A {Math.round(w.kmsFromVitre * 10) / 10}km de Vitré
-                    </div>
+                    </strong>
                   </div>
                 )}
               </div>
@@ -105,8 +105,11 @@ const { lastUpdate, workshops } = await getWorkshops();
 
   <footer class="mt-2">
     <div class="text-center text-sm">
-      Basé sur <a class="text-violet-800 hover:underline cursor-pointer"
-        >trouverunefresque</a
+      Basé sur <a
+        href="https://trouverunefresque.org/"
+        target="_blank"
+        class="text-violet-800 hover:underline cursor-pointer"
+        >trouverunefresque.org</a
       >
     </div>
   </footer>
