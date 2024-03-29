@@ -13,8 +13,6 @@ jobs:
       with: { ref: main }
     - name: Deploy
       uses: fjogeleit/http-request-action@v1
-      env:
-        DEPLOY_HOOK_URL: ${{ secrets.DEPLOY_HOOK_URL }}
       with:
-        url: ${{ env.DEPLOY_HOOK_URL }}
+        url: ${{ secrets.DEPLOY_HOOK_URL }}
         method: 'GET'
