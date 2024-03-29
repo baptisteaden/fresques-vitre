@@ -2,7 +2,7 @@ name: daily deploy
 
 on:
   schedule:
-    - cron: '*/2 * * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   deployment:
