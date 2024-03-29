@@ -1,8 +1,9 @@
 name: daily deploy
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '* * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   deployment:
