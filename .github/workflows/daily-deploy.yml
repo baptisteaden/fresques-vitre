@@ -2,7 +2,7 @@ name: daily deploy
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '* * * * *'
 
 jobs:
   deployment:
@@ -13,6 +13,8 @@ jobs:
       with: { ref: main }
     - name: Deploy
       uses: fjogeleit/http-request-action@v1
+      env:
+        DEPLOY_HOOK_URL: ${{ secrets.DEPLOY_HOOK_URL }}
       with:
-        url: ${{ secrets.DEPLOY_HOOK_URL }}
+        url: ${{ env.DEPLOY_HOOK_URL }}
         method: 'GET'
