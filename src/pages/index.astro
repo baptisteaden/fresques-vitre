@@ -1,0 +1,119 @@
+---
+import Layout from "../layouts/Layout.astro";
+import getWorkshops from "../utils/getWorkshops";
+import formatDateTime from "../utils/formatDateTime";
+import formatDate from "../utils/formatDate";
+import formatTime from "../utils/formatTime";
+import calendarSvg from "../../public/icons/calendar.svg";
+import clockSvg from "../../public/icons/clock.svg";
+import mapPinSvg from "../../public/icons/map-pin.svg";
+
+const { lastUpdate, workshops } = await getWorkshops();
+---
+
+<Layout title="Fresques climat à Vitré">
+  <header class="mb-4">
+    <h1
+      class="title text-center text-6xl font-bold text-purple-700 tracking-widest mb-2"
+    >
+      Fresques Vitré
+    </h1>
+    <h2 class="text-center text-lg text-purple-700 opacity-70">
+      Ateliers climat autour de Vitré
+    </h2>
+  </header>
+
+  <main class="container mx-auto max-w-screen-md">
+    {
+      lastUpdate && (
+        <p class="text-sm opacity-50 mb-1">
+          Dernière mise à jour : {formatDateTime(lastUpdate)}
+        </p>
+      )
+    }
+
+    <ul class="grid grid-cols-1 items-center gap-6">
+      {
+        workshops.map((w) => (
+          <li class="border w-full hover:border-purple-700 rounded-lg p-4 m-auto flex flex-col gap-2 transition-all bg-violet-50">
+            {/* Logo + name */}
+            <div class="flex justify-between">
+              <h3 class="text-xl text-purple-700">{w.workshopTypeDets.name}</h3>
+              <img
+                src={`public/logos/${w.workshopTypeDets.logo}`}
+                alt={w.workshopTypeDets.name}
+                class="h-10"
+              />
+            </div>
+
+            {/* Date */}
+            <div class="flex gap-1">
+              <img src={calendarSvg.src} />
+              {formatDate(w.start_date)}
+            </div>
+
+            {/* Time */}
+            <div class="flex gap-1">
+              <img src={clockSvg.src} />
+              {formatTime(w.start_date)} - {formatTime(w.end_date)}
+              {`(${w.duration})`}
+            </div>
+
+            <div class="flex gap-1 items-start">
+              {/* Address */}
+              <img src={mapPinSvg.src} />
+              <div>
+                <div>
+                  {w.address}, {w.city}
+                </div>
+
+                {w.kmsFromVitre && (
+                  <div class="flex gap-2">
+                    {/* Distance from Vitre */}
+                    <div>
+                      A {Math.round(w.kmsFromVitre * 10) / 10}km de Vitré
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div class="flex gap-2">
+              {/* Maps */}
+              <a
+                href={`https://www.google.com/maps/dir/Vitr%C3%A9,+35500/${encodeURIComponent(`${w.address}, ${w.city}`)}`}
+                target="_blank"
+                class="text-sm self-end text-violet-800 hover:underline"
+              >
+                Voir sur Google Maps »
+              </a>
+
+              {/* Order button */}
+              <a
+                href={w.source_link}
+                target="_blank"
+                class="bg-violet-700 hover:bg-violet-600 rounded-lg py-2 px-4 inline-block text-white ml-auto"
+              >
+                Réserver »
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+
+  <footer class="mt-2">
+    <div class="text-center text-sm">
+      Basé sur <a class="text-violet-800 hover:underline cursor-pointer"
+        >trouverunefresque</a
+      >
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .title {
+    text-shadow: 5px 5px hsl(269 100% 85% / 1);
+  }
+</style>
