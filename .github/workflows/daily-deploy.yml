@@ -2,7 +2,7 @@ name: daily deploy
 
 on:
   schedule:
-    - cron: '40 20 * * *'
+    - cron: '0 21 * * *'
 
 jobs:
   deployment:
@@ -13,3 +13,4 @@ jobs:
       with:
         url: ${{ secrets.DEPLOY_HOOK_URL }}
         method: 'GET'
+        ref: main
