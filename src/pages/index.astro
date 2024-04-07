@@ -70,9 +70,11 @@ const { lastUpdate, workshops } = await getWorkshops();
                 {w.kmsFromVitre && (
                   <div class="flex gap-2">
                     {/* Distance from Vitre */}
-                    <strong>
-                      A {Math.round(w.kmsFromVitre * 10) / 10}km de Vitré
-                    </strong>
+                    {w.kmsFromVitre > 2 && (
+                      <strong>
+                        A {Math.round(w.kmsFromVitre * 10) / 10}km de Vitré
+                      </strong>
+                    )}
                   </div>
                 )}
               </div>
