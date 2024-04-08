@@ -2,6 +2,7 @@ import capitalize from "./capitalize";
 
 const dateTimeFormat = new Intl.DateTimeFormat("fr-FR", {
   dateStyle: "full",
+  timeZone: "Europe/Paris",
 });
 
 export default function formatDate(date: string | Date) {
